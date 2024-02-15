@@ -49,7 +49,8 @@ bower_components/
 .flooignore
 
 #config file
-librechat.yaml
+# librechat.yaml
+flysetsecrets.bat
 
 # Environment
 .npmrc

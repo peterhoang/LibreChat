@@ -2,6 +2,7 @@
 FROM node:18-alpine AS node
 
 COPY . /app
+COPY librechat.yaml /app/librechat.yaml
 WORKDIR /app
 
 # Allow mounting of these files, which have no default

@@ -1,0 +1,34 @@
+# Configuration version (required)
+version: 1.0.2
+
+# Cache settings: Set to true to enable caching
+cache: true
+
+# Example Registration Object Structure (optional)
+registration:
+  socialLogins: ["github", "google", "discord", "openid", "facebook"]
+  # allowedDomains:
+    # - "gmail.com"
+
+# Definition of custom endpoints
+endpoints:
+  custom:
+    # OpenRouter.ai Example
+    - name: "OpenRouter"
+      # For `apiKey` and `baseURL`, you can use environment variables that you define.
+      # recommended environment variables:
+      # Known issue: you should not use `OPENROUTER_API_KEY` as it will then override the `openAI` endpoint to use OpenRouter as well.
+      apiKey: "${OPENROUTER_KEY}"
+      baseURL: "https://openrouter.ai/api/v1"
+      models:
+        default: ["gpt-3.5-turbo", "jondurbin/airoboros-l2-70b"]
+        fetch: true
+      titleConvo: true
+      titleModel: "gpt-3.5-turbo"
+      summarize: false
+      summaryModel: "gpt-3.5-turbo"
+      forcePrompt: false
+      modelDisplayLabel: "OpenRouter"
+
+# See the Custom Configuration Guide for more information:
+# https://docs.librechat.ai/install/configuration/custom_config.html

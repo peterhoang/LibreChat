@@ -1,0 +1,41 @@
+# fly.toml app configuration file generated for phoang-librechat on 2024-02-15T16:13:10-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'phoang-librechat'
+primary_region = 'ewr'
+
+[build]
+
+[env]
+  ALLOW_EMAIL_LOGIN = 'true'
+  ALLOW_REGISTRATION = 'true'
+  ALLOW_SOCIAL_LOGIN = 'true'
+  ALLOW_SOCIAL_REGISTRATION = 'true'
+  DOMAIN_CLIENT = 'https://phoang-librechat.fly.dev'
+  DOMAIN_SERVER = 'https://phoang-librechat.fly.dev'
+  DISCORD_CALLBACK_URL = '/oauth/discord/callback'
+  GITHUB_CALLBACK_URL = '/oauth/github/callback'
+  GOOGLE_CALLBACK_URL = '/oauth/google/callback'
+  HOST = '0.0.0.0'
+  PORT = '3080'
+  SD_WEBUI_URL = 'https://premium-widely-insect.ngrok-free.app'
+  SESSION_EXPIRY = '(1000 * 60 * 60 * 24) * 7'
+  MEILI_HOST='https://meilisearch-cssq.onrender.com'
+  MEILI_HTTP_ADDR='meilisearch:7700'
+  MEILI_NO_ANALYTICS='true'
+  SEARCH='true'
+
+[http_service]
+  internal_port = 3080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
