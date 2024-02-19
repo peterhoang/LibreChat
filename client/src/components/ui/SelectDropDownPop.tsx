@@ -4,6 +4,8 @@ import MenuItem from '~/components/Chat/Menus/UI/MenuItem';
 import type { Option } from '~/common';
 import { useLocalize } from '~/hooks';
 import { cn } from '~/utils/';
+import { useState } from 'react';
+import { useId } from '@radix-ui/react-id';
 
 type SelectDropDownProps = {
   id?: string;
@@ -29,6 +31,8 @@ function SelectDropDownPop({
   emptyTitle = false,
 }: SelectDropDownProps) {
   const localize = useLocalize();
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputId = useId();
   const transitionProps = { className: 'top-full mt-3' };
   if (showAbove) {
     transitionProps.className = 'bottom-full mb-3';
@@ -96,8 +100,23 @@ function SelectDropDownPop({
               side="bottom"
               align="start"
               className="mt-2 max-h-[52vh] min-w-full overflow-hidden overflow-y-auto rounded-lg border border-gray-100 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900 dark:text-white lg:max-h-[52vh]"
+              aria-labelledby={searchInputId}
             >
+              <div className="p-2">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-white-700 w-full border-none bg-transparent p-1 focus:outline-none"
+                />
+              </div>
               {availableValues.map((option) => {
+                const optionLabel = typeof option === 'string' ? option : option.label;
+                if (!optionLabel.toLowerCase().includes(searchQuery.toLowerCase())) {
+                  return null;
+                }
                 return (
                   <MenuItem
                     key={option}

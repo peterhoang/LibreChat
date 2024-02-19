@@ -93,3 +93,4 @@ auth.json
 
 # User uploads
 uploads/
+.aider*
